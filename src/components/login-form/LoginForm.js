@@ -18,10 +18,18 @@ const createLoginPayload = () => {
     return { email, password };
 }
 
+// Função que Chama Modal para informar se os campos foram preenchidos
+const showRequiredLoginFormFieldModal = () => {
+    const dialog = document.querySelector('.required-field-modal');
+    dialog.click();
+}
+
 const handleLogin = () => {
     const { email, password } = createLoginPayload();
     if (!isLoginFormValid(email, password)) {
-        alert('preencha os campos vazios!');
+
+        // Chamando função Modal 
+        showRequiredLoginFormFieldModal()
         return;
     }
 }
