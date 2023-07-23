@@ -24,6 +24,14 @@ const showRequiredLoginFormFieldModal = () => {
     dialog.click();
 }
 
+const showErrorModal = (error) => {
+    if (error.message === 'Not Found') {
+        alert('Usuario não encontrado na base!');
+    }else if(error.message === 'Unprocessable Entity') {
+        alert('Senha inválida!')
+    }
+}
+
 // Função para autenticar usuario
 const authenticateUser = async () => {
     const payload = createLoginPayload();
@@ -31,14 +39,13 @@ const authenticateUser = async () => {
 
     try {
         const response = await window.login(`${window.apiURL}/auth/login`, payload);
-        
+        captureErrorRequest(response);
         const data = await response.json();
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", email);
 
-        console.log(data);
     } catch (error) {
-        console.error(error);
+        showErrorModal(error);
     }
 }
 
