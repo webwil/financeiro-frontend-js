@@ -18,21 +18,16 @@ const createLoginPayload = () => {
     return { email, password };
 }
 
-// Função que Chama Modal para informar se os campos foram preenchidos
-const showRequiredLoginFormFieldModal = () => {
-    const dialog = document.querySelector('.required-field-modal');
-    dialog.click();
-}
-
+// Valida Usuario e senha na Base 
 const showErrorModal = (error) => {
     if (error.message === 'Not Found') {
-        alert('Usuario não encontrado na base!');
+        showModal('user-not-found-modal');
     }else if(error.message === 'Unprocessable Entity') {
-        alert('Senha inválida!')
+        showModal('invalid-password-modal');
     }
 }
 
-// Função para autenticar usuario
+// Autenticar usuario na Base
 const authenticateUser = async () => {
     const payload = createLoginPayload();
     const { email } = payload;
@@ -54,7 +49,7 @@ const handleLogin = () => {
     if (!isLoginFormValid(email, password)) {
 
         // Chamando função Modal 
-        showRequiredLoginFormFieldModal()
+        showModal('required-field-modal');
         return;
     }
 
