@@ -24,6 +24,24 @@ const showRequiredLoginFormFieldModal = () => {
     dialog.click();
 }
 
+// Função para autenticar usuario
+const authenticateUser = async () => {
+    const payload = createLoginPayload();
+    const { email } = payload;
+
+    try {
+        const response = await window.login(`${window.apiURL}/auth/login`, payload);
+        
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", email);
+
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const handleLogin = () => {
     const { email, password } = createLoginPayload();
     if (!isLoginFormValid(email, password)) {
@@ -32,6 +50,9 @@ const handleLogin = () => {
         showRequiredLoginFormFieldModal()
         return;
     }
+
+    authenticateUser();
+
 }
 
 if ('customElements' in window) {
