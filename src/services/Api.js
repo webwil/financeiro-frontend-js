@@ -21,3 +21,13 @@ window.login = (url, user) => {
         headers: {'Content-type': 'application/json'}
     })
 }
+
+window.validateToken = (url, token) => {
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer' + token
+        }
+    })
+}
