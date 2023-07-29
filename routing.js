@@ -6,15 +6,31 @@ const routes = {
     '/dashboard': '<app-dashboard></app-dashboard>'
 }
 
-console.log(routes);
+//console.log(routes);
 
 const renderRoute = async (route) => {
-    const routeContent = routes[route];
+    const routeContent = await conAccesRoute(route) ? routes[route] : routes['/'];
     document.getElementById('main-page').innerHTML = routeContent;
 }
 
 const navigateTo = (pathname) => {
     renderRoute(pathname);
+}
+
+const isAuthenticated = async () => {
+    const token = localStorage.getItem('token');
+
+    if(!token) return false;
+
+    const response = await window.validateToken(`${window.apiURL}/validate/token`, token);
+    const data = await response.json();
+
+    return data.isValidToken;
+}
+
+const conAccesRoute = async (route) => {
+    if (route !== '/dashboard') return true;
+    return await isAuthenticated();
 }
 
 renderRoute(window.location.pathname);
