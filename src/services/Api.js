@@ -27,7 +27,7 @@ window.validateToken = (url, token) => {
         method: 'GET',
         headers: {
             'Content-type': 'application/json',
-            'Authorization': 'Bearer' + token
+            'Authorization': 'Bearer ' + token
         }
     })
 }

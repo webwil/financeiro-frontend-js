@@ -9,12 +9,12 @@ const routes = {
 //console.log(routes);
 
 const renderRoute = async (route) => {
-    const routeContent = await conAccesRoute(route) ? routes[route] : routes['/'];
+    const routeContent = await canAccesRoute(route) ? routes[route] : routes['/'];
     document.getElementById('main-page').innerHTML = routeContent;
 }
 
 const navigateTo = (pathname) => {
-    window.history.pushState({}, pathname, window.location.origin + pathname)
+    window.history.pushState({}, pathname, window.location.origin + pathname);
     renderRoute(pathname);
 }
 
@@ -29,9 +29,20 @@ const isAuthenticated = async () => {
     return data.isValidToken;
 }
 
-const conAccesRoute = async (route) => {
+const canAccesRoute = async (route) => {
     if (route !== '/dashboard') return true;
     return await isAuthenticated();
 }
+/*
+
+
+
+
+
+
+
+*/
+
+
 
 renderRoute(window.location.pathname);
