@@ -10,11 +10,44 @@ class Menu extends HTMLElement {
     connectedCallback() {
         setTimeout(() => {
             getImageUser();
+            messageWelcome();
         }, 1000)
     }
 
 }
 
+// Exibe mensagem de boas vindas
+const getMessageByHour = (hour) => {
+    if (hour <= 5) {
+        return 'Boa Madrugada!';
+    }
+
+    if (hour <= 12) {
+        return 'Bom Dia!';
+    }
+
+    if (hour <= 18) {
+        return 'Boa Tarde!';
+    }
+
+    return 'Boa Noite!';
+}
+
+const messageWelcome = () => {
+    const messageContainer = document.querySelector('.message');
+
+    const { name } = JSON.parse(localStorage.getItem('userInfo'));
+
+    const currentHour = new Date().getHours();
+
+    const greetingMessage = getMessageByHour(currentHour);
+
+    const capitalizeUserName = capitalizeFirstLetter(name);
+
+    messageContainer.innerHTML = `Olá <strong>${capitalizeUserName}</strong>, ${greetingMessage}`;
+}
+
+// Exibe imagem do usuário
 const getImageUser = () => {
     const img = document.querySelector('.profile-img');
 
