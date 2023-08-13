@@ -56,8 +56,6 @@ const getImageUser = () => {
     window.downloadImage(`${window.apiURL}/download/image`, nameImage.image)
         .then(response => response.json())
         .then(response => {
-            console.log(response);
-
             let url = 'data:image/jpg;base64, ' + response.image;
             img.src = url;
         })
