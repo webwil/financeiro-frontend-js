@@ -11,6 +11,8 @@ class AddIcomeModal extends HTMLElement {
         setTimeout(() => {
             createSelectElement('income', 'add', '.select-container-income', 'Categoria da Receita', window.typeIncome, 12);
             createSelectElement('income', 'payment-method', '.select-container-payment-method-income', 'Método de Pagamento', window.paymentMethod, 9);
+
+            toggleCheckboxes('.currentFutureFixedIncome', '.currentPastFixedIncome');
         }, 1000)
     }
 }

@@ -77,3 +77,29 @@ const formatCurrency = (event, financialType) => {
     }
 
 }
+
+// Função marcar somente um checkbox do adicionar receitas
+const toggleCheckboxes = (currentFutureSelector, currentPastSelector) => {
+    const currentFutureCheckbox = document.querySelector(currentFutureSelector);
+    const currentPastCheckbox = document.querySelector(currentPastSelector);
+
+    if (currentFutureCheckbox) {
+        currentFutureCheckbox.addEventListener('change', () => {
+            if (currentFutureCheckbox.checked) {
+                currentPastCheckbox.disabled = true;
+            } else {
+                currentPastCheckbox.disabled = false;
+            }
+        })
+    }
+
+    if (currentPastCheckbox) {
+        currentPastCheckbox.addEventListener('change', () => {
+            if (currentPastCheckbox.checked) {
+                currentFutureCheckbox.disabled = true;
+            } else {
+                currentFutureCheckbox.disabled = false;
+            }
+        })
+    }
+}
