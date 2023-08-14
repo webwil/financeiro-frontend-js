@@ -57,3 +57,23 @@ const createObjTransactionDetails = (financialType) => {
     return transactionDetail;
 
 }
+
+// Formatando campo valor para (Real do Brasil)
+const formatCurrency = (event, financialType) => {
+    const filterValue = event.target.value.replace(/\D/g, '');
+
+    const currency = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(parseFloat(filterValue / 100))
+
+    event.target.value = currency;
+    const valueFormated = parseFloat(filterValue / 100);
+
+    if (financialType === 'income') {
+        window.valueAddIncomeModal = valueFormated;
+    }else if (financialType === 'expense') {
+        window.valueAddExpenseModal = valueFormated;
+    }
+
+}
