@@ -103,3 +103,15 @@ const toggleCheckboxes = (currentFutureSelector, currentPastSelector) => {
         })
     }
 }
+
+const verifyFieldFillTransaction = (financialType, transactionDetail) => {
+    const requiredFields = {
+        income: ['income', 'value', 'dueDate'],
+        expense: ['expense', 'category', 'value', 'dueDate']
+    }
+
+    const fieldsToCheck = requiredFields[financialType];
+
+    return fieldsToCheck.every(field => transactionDetail[field] !== '' && transactionDetail[field] !== undefined);
+
+}

@@ -21,8 +21,13 @@ const handleAddIncome = (event) => {
     event.preventDefault();
 
     const incomeDetails = createObjTransactionDetails('income');
+    const buttonAddIncome = document.querySelector('.add-income');
 
-    console.log(incomeDetails);
+    if (!verifyFieldFillTransaction('income', incomeDetails)) {
+        buttonAddIncome.removeAttribute('data-dismiss');
+        alert('Preencha os campos vazios!');
+        return;
+    }
 
 }
 
